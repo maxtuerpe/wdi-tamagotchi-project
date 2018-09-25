@@ -1,0 +1,31 @@
+
+body{
+    background-image: url("../img/background.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+#guy {
+    background-image: url("../img/goat.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    height: 200px;
+    width: 220px;
+    position: center;
+    color: white;
+}
+
+#start-screen {
+    margin-top: 20%;
+    margin-left: 40%;
+    width: 20%;
+    color: white;
+}
+#metrics {
+    color: rgb(16, 194, 46);
+}
+#controls {
+    color: white;
+}
+.display {
+    display: inline-block;
+}
