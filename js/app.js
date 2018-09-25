@@ -1,20 +1,12 @@
 let seconds = 0;
 const timePassing = () => {
-    $('.time').text(`${seconds}`);
-    $('.hunger-meter').text(`${player1.hunger}`);
-    $('.tired-meter').text(`${player1.sleepiness}`);
-    $('.bored-meter').text(`${player1.boredom}`);
-    $('.age-meter').text(`${player1.age}`);
     if (seconds % Math.floor(Math.random() * 2 +6) === 0){
         player1.hunger+= Math.floor(Math.random() * 3 +1);
-    }
-    if (seconds% Math.floor(Math.random() * 2 +6) === 2){
+    } if (seconds% Math.floor(Math.random() * 2 +6) === 2){
         player1.sleepiness+= Math.floor(Math.random() * 3 +1);
-    }
-    if (seconds% Math.floor(Math.random() * 2 +6) === 4){
+    } if (seconds% Math.floor(Math.random() * 2 +6) === 4){
         player1.boredom+= Math.floor(Math.random() * 3 +1);
-    }
-    if (seconds%50 === 0){
+    } if (seconds%50 === 0){
         player1.age++;
     }
     seconds++;   
@@ -37,13 +29,19 @@ $('#start-button').on('click', (e)=>{
     $('body').append('<div class="display" id="controls"><h2>controls</h2></div>');
     metrics();
     controls();
+    setInterval(updatePlayer, 100)
+    setInterval(playerKill, 100)
     $('#feed').on('click', clickFeed)
     $('#sleep').on('click', clickSleep)
-    $('#play').on('click', clickPlay)
-    
-    
+    $('#play').on('click', clickPlay)    
 })
-
+const updatePlayer = () => {
+    $('.time').text(`${seconds}`);
+    $('.hunger-meter').text(`${player1.hunger}`);
+    $('.tired-meter').text(`${player1.sleepiness}`);
+    $('.bored-meter').text(`${player1.boredom}`);
+    $('.age-meter').text(`${player1.age}`);
+}
 const metrics = () =>{
     $('#metrics').append(`<h4>timer: <span class="time">0</span></h4>`);
     $('#metrics').append(`<h4>hunger: <span class="hunger-meter">0</span></h4>`);
@@ -57,16 +55,43 @@ const controls = () =>{
     $('#controls').append(`<button class='controls' id='sleep'>sleep</button>`)
     $('#controls').append(`<button class='controls' id='play'>play</button>`)
 }
-
 const clickFeed = () => {
+    if (player1.hunger < 2){
+        alert(`${player1.name} is full`)
+    }
+    if (player1.hunger >= 2){
     player1.hunger -= 2;
+    }
+    
 }
 const clickSleep = () => {
+    if (player1.sleepiness < 2){
+        alert(`${player1.name} is woke`)
+    }
+    if (player1.sleepiness >= 2){
     player1.sleepiness -= 2;
+    }    
 }
 const clickPlay = () => {
+    if (player1.boredom < 2){
+        alert(`${player1.name} is indeed entertained`)
+    }
+    if (player1.boredom >= 2){
     player1.boredom -= 2;
+    }    
 }
+const playerKill = () => {
+    if (player1.hunger >= 5 || player1.sleepiness >= 5 || player1.boredom >= 5){
+        if (confirm("Retry?")) {
+            document.location.reload();
+        } else {
+            txt = "You pressed Cancel!";
+        }
+    }
+}
+
+
+
 
 
 
