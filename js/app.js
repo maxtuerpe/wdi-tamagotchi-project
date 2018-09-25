@@ -28,16 +28,18 @@ class Tamagotchi {
         this.age = 0;
     }
 }
-const player1 = new Tamagotchi ($('input').val());
 
 $('#start-button').on('click', (e)=>{
-    
+    const player1 = new Tamagotchi ($('#name').val());
+    $(e.currentTarget).parent().remove();
     $('body').append('<div id="guy"></div>');
     $('body').append(`<div class="display" id="metrics"><h2>${player1.name}'s Stats</h2></div>`);
     $('body').append('<div class="display" id="controls"><h2>controls</h2></div>');
-    $(e.currentTarget).parent().remove();
     metrics();
     controls();
+    $('#feed').on('click', clickFeed)
+    $('#sleep').on('click', clickSleep)
+    $('#play').on('click', clickPlay)
     
     
 })
@@ -51,10 +53,14 @@ const metrics = () =>{
     setInterval(timePassing, 1000);
 }
 const controls = () =>{
-    $('#controls').append(`<button class='controls'>feed</button>`)
-    $('#controls').append(`<button class='controls'>sleep</button>`)
-    $('#controls').append(`<button class='controls'>play</button>`)
+    $('#controls').append(`<button class='controls' id='feed'>feed</button>`)
+    $('#controls').append(`<button class='controls' id='sleep'>sleep</button>`)
+    $('#controls').append(`<button class='controls' id='play'>play</button>`)
 }
+
+const clickFeed = () => {}
+const clickSleep = () => {}
+const clickPlay = () => {}
 
     
 
