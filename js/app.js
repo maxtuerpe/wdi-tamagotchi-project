@@ -1,3 +1,12 @@
+const goatPics = [
+    'https://gifer.com/i/MXiV.gif',
+    'https://mbtskoudsalg.com/images/baby-goat-png-8.png',
+    'https://marketplace.canva.com/MAASsTVvxVc/1/thumbnail_large/canva-baby-goat-MAASsTVvxVc.png',
+    'https://webiconspng.com/wp-content/uploads/2017/09/Goat-PNG-Image-78269.png',
+    'https://gifer.com/i/YdBR.gif',
+    'https://mbtskoudsalg.com/images/animal-skull-png-4.png'
+]
+
 let seconds = 0;
 const timePassing = () => {
     if (seconds % Math.floor(Math.random() * 2 +6) === 0){
@@ -6,7 +15,7 @@ const timePassing = () => {
         player1.sleepiness+= Math.floor(Math.random() * 3 +1);
     } if (seconds% Math.floor(Math.random() * 2 +6) === 4){
         player1.boredom+= Math.floor(Math.random() * 3 +1);
-    } if (seconds%50 === 0){
+    } if (seconds%10 === 0){
         player1.age++;
     }
     seconds++;   
@@ -29,18 +38,34 @@ $('#start-button').on('click', (e)=>{
     $('body').append('<div class="display" id="controls"><h2>controls</h2></div>');
     metrics();
     controls();
+    setInterval(move, 1000 * player1.age);
     setInterval(updatePlayer, 100)
-    setInterval(playerKill, 100)
+    setInterval(kill, 1000)
     $('#feed').on('click', clickFeed)
     $('#sleep').on('click', clickSleep)
-    $('#play').on('click', clickPlay)    
+    $('#play').on('click', clickPlay) 
 })
-const updatePlayer = () => {
+const updatePlayer = () =>{
     $('.time').text(`${seconds}`);
     $('.hunger-meter').text(`${player1.hunger}`);
     $('.tired-meter').text(`${player1.sleepiness}`);
     $('.bored-meter').text(`${player1.boredom}`);
     $('.age-meter').text(`${player1.age}`);
+    if (player1.age === 0){
+        
+    }
+    if(player1.age === 1){
+        $('#guy').css(`background-image`, `url(${goatPics[1]})`);
+    }
+    if(player1.age === 2){
+        $('#guy').css(`background-image`, `url(${goatPics[2]})`);
+    }
+    if(player1.age === 3){
+        $('#guy').css(`background-image`, `url(${goatPics[3]})`);
+    }
+    if(player1.age === 4){
+        $('#guy').css(`background-image`, `url(${goatPics[4]})`);
+    }
 }
 const metrics = () =>{
     $('#metrics').append(`<h4>timer: <span class="time">0</span></h4>`);
@@ -55,7 +80,7 @@ const controls = () =>{
     $('#controls').append(`<button class='controls' id='sleep'>sleep</button>`)
     $('#controls').append(`<button class='controls' id='play'>play</button>`)
 }
-const clickFeed = () => {
+const clickFeed = () =>{
     if (player1.hunger < 2){
         alert(`${player1.name} is full`)
     }
@@ -64,7 +89,7 @@ const clickFeed = () => {
     }
     
 }
-const clickSleep = () => {
+const clickSleep = () =>{
     if (player1.sleepiness < 2){
         alert(`${player1.name} is woke`)
     }
@@ -72,7 +97,7 @@ const clickSleep = () => {
     player1.sleepiness -= 2;
     }    
 }
-const clickPlay = () => {
+const clickPlay = () =>{
     if (player1.boredom < 2){
         alert(`${player1.name} is indeed entertained`)
     }
@@ -80,15 +105,29 @@ const clickPlay = () => {
     player1.boredom -= 2;
     }    
 }
-const playerKill = () => {
-    if (player1.hunger >= 5 || player1.sleepiness >= 5 || player1.boredom >= 5){
-        if (confirm("Retry?")) {
+const kill = () =>{
+    if (player1.hunger >= 10 || player1.sleepiness >= 10 || player1.boredom >= 10){
+        $('#guy').css('background-image', `url(${goatPics[5]})`);
+        setTimeout( ()=>{if (confirm("Retry?")) {
             document.location.reload();
-        } else {
-            txt = "You pressed Cancel!";
-        }
+        } else if(alert("please leave.")){
+            document.location.close();
+        }} , 5000 ) 
     }
 }
+const move = () =>{
+    $('#guy').velocity({
+        translateX: Math.floor(Math.random() * 1000),
+        translateY: Math.floor(Math.random() * 500),
+        rotateZ: 45
+    }, 500 * player1.age)     
+    $('#guy').velocity({
+        translateX: Math.floor(Math.random() * 1000),
+        translateY: Math.floor(Math.random() * 100 ),
+        rotateZ: -45
+    }, 500 * player1.age)     
+}
+
 
 
 
