@@ -6,7 +6,7 @@ const goatPics = [
     'https://gifer.com/i/YdBR.gif',
     'https://mbtskoudsalg.com/images/animal-skull-png-4.png'
 ]
-
+const careless = $('#careless')
 let seconds = 0;
 const timePassing = () => {
     if (seconds % Math.floor(Math.random() * 2 +6) === 0){
@@ -31,16 +31,18 @@ class Tamagotchi {
 }
 const player1 = new Tamagotchi ();
 $('#start-button').on('click', (e)=>{
+    
     player1.name = ($('#name').val());
+     setInterval(kill, 1000)
     $(e.currentTarget).parent().remove();
     $('body').append('<div id="guy"></div>');
+    $('#guy').on('click', ()=>{$('#pew')[0].play()})
     $('body').append(`<div class="display" id="metrics"><h2>${player1.name}'s Stats</h2></div>`);
     $('body').append('<div class="display" id="controls"><h2>controls</h2></div>');
     metrics();
     controls();
-    setInterval(move, 1000 * player1.age);
     setInterval(updatePlayer, 100)
-    setInterval(kill, 1000)
+    setInterval(move, 1000 * (player1.age + 1));
     $('#feed').on('click', clickFeed)
     $('#sleep').on('click', clickSleep)
     $('#play').on('click', clickPlay) 
@@ -52,7 +54,6 @@ const updatePlayer = () =>{
     $('.bored-meter').text(`${player1.boredom}`);
     $('.age-meter').text(`${player1.age}`);
     if (player1.age === 0){
-        
     }
     if(player1.age === 1){
         $('#guy').css(`background-image`, `url(${goatPics[1]})`);
@@ -86,8 +87,7 @@ const clickFeed = () =>{
     }
     if (player1.hunger >= 2){
     player1.hunger -= 2;
-    }
-    
+    }   
 }
 const clickSleep = () =>{
     if (player1.sleepiness < 2){
@@ -117,16 +117,19 @@ const kill = () =>{
 }
 const move = () =>{
     $('#guy').velocity({
-        translateX: Math.floor(Math.random() * 1000),
-        translateY: Math.floor(Math.random() * 500),
+        translateX: Math.floor(Math.random() * 1000 -500),
+        translateY: Math.floor(Math.random() * 500 - 250),
         rotateZ: 45
-    }, 500 * player1.age)     
+    }, 500 * (player1.age + 1))     
     $('#guy').velocity({
-        translateX: Math.floor(Math.random() * 1000),
-        translateY: Math.floor(Math.random() * 100 ),
+        translateX: Math.floor(Math.random() * 1000 -500),
+        translateY: Math.floor(Math.random() * 500 -250),
         rotateZ: -45
-    }, 500 * player1.age)     
+    }, 500 * (player1.age + 1)) 
 }
+$('#oh').on('click', () => {
+careless[0].play();
+})
 
 
 

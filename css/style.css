@@ -5,13 +5,19 @@ body{
     background-repeat: no-repeat;
 }
 #guy {
-    background-image: url("../img/goat.png");
+    background-image: url("https://res.cloudinary.com/mediocre/image/upload/v1490986842/z0cedqdfzk8z3860jyej.gif");
     background-size: 100%;
     background-repeat: no-repeat;
     height: 200px;
     width: 220px;
-    position: center;
+    position: absolute;
     color: white; 
+    bottom: 50;
+    right: 50;
+    z-index: 15;
+    top: 50%;
+    left: 50%;
+    margin: -100px 0 0 -150px;
 }
 
 #start-screen {
@@ -21,10 +27,41 @@ body{
     color: white;
 }
 #metrics {
-    color: rgb(16, 194, 46);
+    color: black;
+    background-color: white;
+    width: 15em;
+    height: 17em;
+    text-align: center;
+    align-self: right;
+    border-radius: 2em;
+    position: fixed;
+    bottom: 0;
+    left: 0;
 }
 #controls {
-    color: white;
+    color: black;
+    background-color: white;
+    width: 15em;
+    height: 17em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: bottom;
+    border-radius: 2em;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    
+}
+.controls {
+    display: block;
+    background-color: seagreen;
+    width: 6em;
+    height: 3em;
+    border-radius: 1em;
+    
+
 }
 .display {
     display: inline-block;
